@@ -1,5 +1,11 @@
 - provide(:title, @user.name)
 .center.hero-unit
-  %h1
+  %h4
     = @user.name
-  , #{@user.email}
+  - if @user.microposts.any?
+    %h5
+      Posts (#{@user.microposts.count})
+    %ol.microposts
+      = render @microposts
+    = link_to "Click to post", root_url  
+    = will_paginate @microposts

@@ -1,7 +1,15 @@
 - provide(:title, 'Home')
 .center.hero-unit
-  %h1 Welcome to my Application
-  %h3
-    This is a simple blogger application
-  = link_to "Sign up now!", '/signup', class: "btn btn-info"
-  = link_to "Sign in", '/signin', class: "btn btn-warning"
+  - if signed_in?
+    .row
+      %aside.span4
+        %section
+          = render 'shared/user_info'
+        %section
+          = render 'shared/micropost_form'
+  - else        
+    %h1 Welcome to my Application
+    %h3
+      This is a simple blogger application
+    = link_to "Sign up now!", '/signup', class: "btn btn-info"
+    = link_to "Sign in", '/signin', class: "btn btn-warning"
