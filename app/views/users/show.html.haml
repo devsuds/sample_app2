@@ -1,10 +1,10 @@
 - provide(:title, @user.name)
 .center.hero-unit
-  %h4
+  %h3
     = @user.name
   - if @user.microposts.any?
     %h5
-      Posts (#{@user.microposts.count})
+      total posts (#{@user.microposts.count})
     %ol.microposts
       = render @microposts
     = link_to "Click to post", root_url  
