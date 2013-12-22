@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   protect_from_forgery with: :exception
   
   def new
+    redirect_to root_url if signed_in?
   end
   
   def create

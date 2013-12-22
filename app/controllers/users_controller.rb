@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include SessionsHelper
   
-  before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :signed_in_user, only: [:index, :edit,:update, :following, :followers]
   before_action :correct_user, only: [:edit, :update]
   
   def show
@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
     
   def new
+    redirect_to root_url if signed_in?
     @user = User.new
   end
   
@@ -35,23 +36,30 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Congratulation!! your rofile updated successfully"
+      flash[:success] = "Congratulation!! your profile updated successfully"
       redirect_to @user
     else
       render 'edit'
     end
   end
+
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
   
 private
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
-  end
-  
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to signin_url, notice: "You are not allowed to perform this action. Please sign in to continue" unless signed_in?
-    end
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
   
   def correct_user

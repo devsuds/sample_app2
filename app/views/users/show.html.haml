@@ -2,10 +2,13 @@
 .center.hero-unit
   %h3
     = @user.name
+  = render 'follow_form' if signed_in?
   - if @user.microposts.any?
     %h5
       total posts (#{@user.microposts.count})
     %ol.microposts
       = render @microposts
-    = link_to "Click to post", root_url  
+    = link_to "Click to post", root_url
     = will_paginate @microposts
+  %section
+    = render 'shared/stats'
