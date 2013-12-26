@@ -1,4 +1,6 @@
 = form_for(@micropost) do |f|
-  .field
-    = f.text_area :content, placeholder: "Compose new..."
-  = f.submit "Post", class: "btn btn-primary"
+  %fieldset
+    .clearfix
+      = f.text_area :content, class: "input-xlarge", placeholder: "Compose new..."
+  .actions
+    = f.submit "Post", class: "btn btn-info"

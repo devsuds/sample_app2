@@ -1,20 +1,15 @@
-.nav.navbar.navbar-fixed-top.navbar-default-bg
-  .navbar-inner
-    %nav.nav.navbar-default.pull-right
-      %ul.nav
-        - if !signed_in?
-          %li= link_to "Home", root_path
+%section#headerSection
+  .container
+    .navbar
+      .container
+        %button.btn.btn-navbar.active{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.brand{:href => root_path}
+          %img.media-object{:alt => "logo-h2lips", :src => "assets/logo.png"}
+        .nav-collapse.collapse
         - if signed_in?
-          -# %li.dropdown
-            -# %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              -# Account
-              -# %b.caret
-            -# %ul.dropdown-menu
-          %li= link_to "My profile", current_user
-          %li= link_to "Users", users_path
-          %li= link_to "Settings", edit_user_path(current_user)
-          %li= link_to "Sign out", signout_path, method: "delete"
+          = render_navigation renderer: :bootstrap, context: :user,expand_all: true, level: 1..2
         - else
-          %li= link_to "Sign in", signin_path
-        %li= link_to "Help", help_path
-        %li= link_to "About us", about_path
+          = render_navigation renderer: :bootstrap, context: :guest,expand_all: true, level: 1..2
