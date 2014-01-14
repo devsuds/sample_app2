@@ -10,7 +10,7 @@ module SessionsHelper
     !current_user.nil?
   end
   
-  def current_user=(user)
+  def current_user= user
     @current_user = user
   end
   
@@ -40,7 +40,7 @@ module SessionsHelper
   def signed_in_user
     unless signed_in?
       store_location
-      redirect_to signin_url, notice: "You are not allowed to perform this action. Please sign in to continue"
+      redirect_to '/', notice: "You are not allowed to perform this action. Please sign in to continue"
     end
   end
 end

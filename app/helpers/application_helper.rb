@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def full_title page_title
-    base_title = 'A domp application'
+    base_title = 'From Heart to Lips'
     if page_title.empty?
       base_title
     else

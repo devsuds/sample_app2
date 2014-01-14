@@ -1,0 +1,3 @@
+:plain
+  $("#current_posts").html("#{escape_javascript(render(current_user.microposts))}")
+  $("#post_count").html("total posts (#{current_user.microposts.count})")

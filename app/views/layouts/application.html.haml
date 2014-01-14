@@ -10,5 +10,11 @@
     = render 'layouts/shim'
   %body
     = render 'layouts/header'
-    = render 'layouts/slider'
+    = render 'layouts/slider' if !signed_in?
+    %section#bodySection
+      = render 'shared/error_messages'
+      #sectionTwo
+        .container
+          .row{:style => "text-align:left"}
+            = yield
     = render 'layouts/footer'

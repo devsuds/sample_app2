@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   include SessionsHelper
   
-  before_action :signed_in_user, only: [:index, :edit,:update, :following, :followers]
+  before_action :signed_in_user, only: [:index, :edit, :update, :following, :followers]
   before_action :correct_user, only: [:edit, :update]
   
   def show
-     @user = User.find params[:id]
-     @microposts = @user.microposts.paginate page: params[:page], limit: 5
+    @user = User.find params[:id]
+    @microposts = @user.microposts
   end
   
   def index
@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     
   def new
     redirect_to root_url if signed_in?
-    @user = User.new
   end
   
   def create

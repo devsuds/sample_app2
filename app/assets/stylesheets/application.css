@@ -12,5 +12,6 @@
  *= require bootstrap_navbar_split_dropdowns
  *= require bootstrap-responsive.min
  *= require font-awesome
+ *= require font-awesome-ie7
  *= require base
  */

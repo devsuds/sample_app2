@@ -1,0 +1,4 @@
+= form_for(@micropost, remote: true) do |f|
+  = f.text_area :content, class: "input-xlarge", placeholder: "Compose new..."
+  %br
+  = f.submit "Post", class: "btn btn-success"

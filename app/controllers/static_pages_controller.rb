@@ -1,8 +1,9 @@
 class StaticPagesController < ApplicationController
   include SessionsHelper
   def home
-    @user = current_user
     @micropost = current_user.microposts.build if signed_in?
+    @microposts = current_user.microposts if signed_in?
+    @user = User.new unless signed_in?
   end
 
   def about

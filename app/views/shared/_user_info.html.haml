@@ -1,4 +1,4 @@
-%h4 Hey #{current_user.name.split(" ")[0]}!! share your feelings now
+%h3 Hey #{current_user.name.split(" ")[0]}!! share your feelings now
 = link_to "You have", current_user
-%span
+%span#post_count
   = pluralize(current_user.microposts.count, "post")

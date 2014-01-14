@@ -1,17 +1,36 @@
-- provide(:title, 'Home')
-.hero-unit
-  - if signed_in?
-    .row
-      %aside.span6.offset2
-        %section
-          = render 'shared/user_info'
-        %section
-          = render 'shared/stats'
-        %section
-          = render 'shared/micropost_form'
-  - else        
-    %h1 Welcome to my Application
-    %h3
-      This is a simple blogger application
-    = link_to "Sign up now!", '/signup', class: "btn btn-info"
-    = link_to "Sign in", '/signin', class: "btn btn-warning"
+- provide(:title, current_user.name) if signed_in?
+- provide(:title, "Home") if !signed_in?
+- if signed_in?
+  .span5.well
+    %section
+      = render 'shared/user_info'
+    %section
+      = render 'shared/stats'
+    %section
+      = render 'shared/micropost_form'
+  .span4.offset1#current_posts
+    - if @user.microposts.any?
+      = render @microposts
+- else
+  .span4.well        
+    %h3 Welcome to h2lips
+    %h5 This is a micro-blogging application
+    = link_to "Sign up now!", '#signup', class: "btn btn-default", "data-toggle" => "modal"
+    = link_to "Sign in", '#signin', class: "btn btn-primary", "data-toggle" => "modal"
+
+     
+/ Signup form
+#signup.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "signup-form", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Join h2lips
+  .modal-body
+    = render 'users/signup'
+
+/ Signin form
+#signin.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "signin-form", :role => "dialog", :tabindex => ""}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 User login
+  .modal-body
+    = render 'sessions/signin'
