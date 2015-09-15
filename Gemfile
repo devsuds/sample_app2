@@ -1,22 +1,24 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.2.2'
 
 gem 'rails', '4.0.0'
 
 group :production do
-  gem 'pg', '0.15.1'
-  gem 'rails_12factor', '0.0.2'
+  # gem 'pg', '0.15.1'
+  # gem 'rails_12factor', '0.0.2'
 end
 
 group :development, :test do
-  gem 'mysql2'
+  gem 'mysql2', '~> 0.3.18'
+  gem 'activerecord-mysql-adapter'
+  gem 'pry-byebug'
 end
 
 gem 'haml-rails'
 
 gem 'zeus'
 
-gem 'bcrypt-ruby', '~> 3.0.0' 
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 
 gem 'sass-rails', '4.0.0'
